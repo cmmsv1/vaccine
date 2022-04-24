@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$item->name}}</h5>
                   <p class="card-text">{{$item->short_desc}}</p>
-                  <a href="{{route('oxy.detail',$item->slug)}}" class="btn btn-primary">Go somewhere</a>
+                  <a href="{{route('oxy.detail',$item->slug)}}" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>

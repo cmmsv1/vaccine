@@ -83,8 +83,13 @@
                     message:message
                 },
                 success: function (response) {
-                    console.log(response);
                     $('#formModal').modal('hide');
+                    swal({
+                        title: "Success!",
+                        text: response.message,
+                        icon: "success",
+                    });
+                    
                 }
             });
         });

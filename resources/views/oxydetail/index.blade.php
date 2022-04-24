@@ -88,6 +88,14 @@
                         title: "Success!",
                         text: response.message,
                         icon: "success",
+                        buttons: ["Quản lý đơn hàng!", "Ở lại trang!"],
+                        })
+                        .then((ok) => {
+                        if (ok) {
+                            
+                        } else {
+                            window.location.href = "/user/orders";
+                        }
                     });
                     
                 }

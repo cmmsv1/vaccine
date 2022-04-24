@@ -11,9 +11,10 @@
             <th>Chi tiết</th>
         </tr>
     </thead>
-    <tbody>                         
+    <tbody>     
+        @foreach ($orders as $order)                    
         <tr>
-            @foreach ($orders as $order)
+            
                 
             
             <td>{{$order->id}}</td>
@@ -33,8 +34,9 @@
                 <td><span style="color:#fff;padding: 10px;background-color: rgb(231, 64, 81)">Đã bị huỷ bỏ</span></td>
             @endif
             <td><a href="{{route('user.orders.detail',$order->id)}}" class="btn btn-primary">Chi tiết</a></td>
-            @endforeach
+           
         </tr>
+        @endforeach
     </tbody>
 </table>
 {!! $orders->links()!!}

@@ -2,19 +2,18 @@
 download giải nén 
 vào thư mục vừa giải nén chạy Terminal
 # Chạy lần lượt các lệnh : 
-composer install
-npm install 
-cp .env.example .env
-php artisan key:generate
+<p>composer install</p>
+<p>npm install</p>
+<p>cp .env.example .env</p>
+<p>php artisan key:generate</p>
 
 # Tạo csdl có tên là : vaccination
-
-php artisan migrate
-php artisan db:seed
+<p>php artisan migrate</p>
+<p>php artisan db:seed</p>
 
 # Chạy project
 php artisan serve
 
-### Tài khoản ADMIN
-email: admin@gmail.com
-pass: admin
+## Tài khoản ADMIN
+<p>email: admin@gmail.com</p>
+<p>pass: admin</p>

@@ -7,7 +7,7 @@
 
 <p>composer install</p>
 <p>npm install</p>
-<p>cp .env.example .env</p>
+<p>copy .env.example .env</p>
 <p>php artisan key:generate</p>
 
 # Tạo csdl có tên là : vaccination

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
+    <div class="row container mx-auto">
         <div class="col-lg-12 mx-auto">
           <input type="hidden" id="check" value="{{Auth::user()->confirm_register}}">
           <input type="hidden" id="type" value="{{Auth::user()->type}}">
@@ -23,7 +23,7 @@
                     <td>{{$item->number}}</td>
                     <td>{{$item->address}}</td>
                     <td>{{$item->time . ' - ' .$item->date }}</td>
-                    <td><a data-href="{{$item->id}}" class="btn btn-primary register">Đăng ký</a></td>
+                    <td><a data-href="{{$item->id}}" style="color: #fff" class="btn btn-primary register">Đăng ký</a></td>
                   </tr>
                   @endforeach
                 </tbody>

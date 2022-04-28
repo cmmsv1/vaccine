@@ -1,5 +1,11 @@
 @extends('layouts.dashboard')
 @section('content')
+@if (Auth::user()->confirm_register == 1)
+<div class="px-4 py-4">
+
+    <span>Thông tin của bạn đang trong quá trình xác minh . Vui lòng quay lại sau</span>
+</div>
+@else
 <style>
     .form-check-input{
         cursor: pointer;
@@ -170,47 +176,51 @@
             </form> 
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#next_user").click(function (e) { 
-                e.preventDefault();
-                $('#user_info').hide();
-                $('#register_info').fadeIn();
-            });
-            $("#back_info").click(function (e) { 
-                e.preventDefault();
-                $('#user_info').fadeIn();
-                $('#register_info').hide();
-            });
-            $("#next_Info").click(function (e) { 
-                e.preventDefault();
-                $('#confirm').fadeIn();
-                $('#register_info').hide();
-            });
-            $("#back_confirm").click(function (e) { 
-                e.preventDefault();
-                $('#register_info').fadeIn();
-                $('#confirm').hide();
-            });
-            $('#formInfo').submit(function (e) { 
-                e.preventDefault();
-                var data = new FormData(this);
-                $.ajax({
-                    type: "POST",
-                    url: "{{route('user.formInfo.update')}}",
-                    data: data,
-                    processData: false,
-                    dataType: 'json',
-                    contentType: false,
-                    success: function (response) {
-                        swal({
-                            title: "Success!",
-                            text: response.message,
-                            icon: "success",
-                        });
-                    }
-                });
+    
+@endif
+<script>
+    $(document).ready(function () {
+        $("#next_user").click(function (e) { 
+            e.preventDefault();
+            $('#user_info').hide();
+            $('#register_info').fadeIn();
+        });
+        $("#back_info").click(function (e) { 
+            e.preventDefault();
+            $('#user_info').fadeIn();
+            $('#register_info').hide();
+        });
+        $("#next_Info").click(function (e) { 
+            e.preventDefault();
+            $('#confirm').fadeIn();
+            $('#register_info').hide();
+        });
+        $("#back_confirm").click(function (e) { 
+            e.preventDefault();
+            $('#register_info').fadeIn();
+            $('#confirm').hide();
+        });
+        $('#formInfo').submit(function (e) { 
+            e.preventDefault();
+            var data = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: "{{route('user.formInfo.update')}}",
+                data: data,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+                    swal({
+                        title: "Success!",
+                        text: response.message,
+                        icon: "success",
+                    }).then(()=>{
+                        window.location.href = '/user/formInfo';
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 @endsection

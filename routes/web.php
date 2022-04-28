@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OxyProducerController;
 use App\Http\Controllers\Admin\QLRegisterController;
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\SignUpVaccController;
+use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\DetailOxyController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\FormInfoController;
@@ -75,6 +76,11 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
         Route::post('register-vaccine/store', [QLRegisterController::class, 'store'])->name('admin.register-vaccine.store');
         Route::get('register-vaccine/edit/{id}', [QLRegisterController::class, 'edit'])->name('admin.register-vaccine.edit');
         Route::delete('register-vaccine/remove/{id}', [QLRegisterController::class, 'remove'])->name('admin.register-vaccine.remove');
+        // order
+        Route::get('user-profile', [UserProfileController::class, 'index'])->name('admin.user-profile');
+        Route::get('user-profile/detail/{id}', [UserProfileController::class, 'detail'])->name('admin.user-profile.detail');
+        Route::post('user-profile/detail/update/{id}', [UserProfileController::class, 'update'])->name('admin.user-profile.update');
+        Route::get('user-profile/item', [UserProfileController::class, 'getItem'])->name('admin.user-profile.item');
     });
 });
 

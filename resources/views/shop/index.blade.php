@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row">
-        @foreach ($oxies as $item)
-            
-        
+    <div class="row px-4 py-4">
+        @foreach ($oxies as $item)  
         <div class="col-lg-3">
             <div class="card" style="width: 18rem;">
                 <a href="{{route('oxy.detail',$item->slug)}}">

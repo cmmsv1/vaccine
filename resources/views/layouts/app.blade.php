@@ -11,6 +11,13 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="{{asset('home/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('home/css/pogo-slider.min.css')}}">
+    <link rel="stylesheet" href="{{asset('home/css/style.css')}}">    
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{asset('home/css/responsive.css')}}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{asset('home/css/custom.css')}}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,11 +29,17 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+    <style>
+        .container-fluid{
+            padding: 0px 8px 0px 0px !important;
+            margin: 0 !important;
+        }
+    </style>
     <div id="app">
         
         @include('page.header')
-       <div class="container">
-            <main class="py-4">
+       <div class="container-fluid">
+            <main class="">
                 @yield('content')
             </main>
        </div>

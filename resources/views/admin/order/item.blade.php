@@ -6,7 +6,6 @@
             <th>Tên khách hàng</th>
             <th>Số điện thoại</th>
             <th>Thành tiền</th>
-            <th>Hình thức thanh toán</th>
             {{-- <th>ID thanh toán</th> --}}
             <th>Thời gian đặt hàng</th>
             <th>Trạng thái</th>
@@ -20,11 +19,6 @@
                 <td>{{$item->name}}</td>
                 <td>{{$item->phone}}</td>
                 <td>@php echo number_format($item->total, 0, ',', '.').'đ';@endphp</td>
-                @if ($item->payment_method == 0)
-                    <td>Thanh toán khi nhận hàng</td>
-                @else
-                    <td>{{$item->payment_method}}</td>
-                @endif
                 {{-- <td>{{$item->payment_id}}</td> --}}
                 <td>{{$item->created_at}}</td>
                 @if ($item->status == 0)

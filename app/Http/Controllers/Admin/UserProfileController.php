@@ -12,14 +12,14 @@ class UserProfileController extends Controller
 {
     public function index()
     {
-        $forms = FormInfo::orderBy('id', 'asc')->paginate(5);
+        $forms = FormInfo::orderBy('id', 'asc')->paginate(8);
         return view('admin.user_profile.index')
             ->with(compact('forms'));
     }
     public function getItem(Request $request)
     {
         if ($request->ajax()) {
-            $forms = FormInfo::orderBy('id', 'asc')->paginate(5);
+            $forms = FormInfo::orderBy('id', 'asc')->paginate(8);
             return view('admin.user_profile.item')
                 ->with(compact('forms'))->render();
         }

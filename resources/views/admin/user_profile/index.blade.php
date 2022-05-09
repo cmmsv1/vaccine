@@ -2,10 +2,10 @@
 @section('admin')
 <div class="container">
     <div class="py-4 px-4">
-        <h3 class="text-center">Quản lý đơn hàng</h3>
+        <h3 class="text-center">Quản lý Thông tin đăng ký</h3>
         <div class="row mt-5">
             <div class="col-lg-12 mx-auto">
-                <h4 class="text-center">Danh sách đơn hàng</h4>
+                <h4 class="text-center">Danh sách đăng ký</h4>
                 <div id="read" class="mt-3">
                     @include('admin.user_profile.item')
                 </div>

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('name');
+            $table->integer('number')->nullable();
+            $table->string('vaccine_name')->nullable();
             $table->string('date_of_injection_id');
             $table->integer('status')->default(0);
             $table->timestamps();

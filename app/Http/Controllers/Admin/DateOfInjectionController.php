@@ -12,7 +12,7 @@ class DateOfInjectionController extends Controller
 {
     public function index()
     {
-        $dates = DateOfInjection::paginate(4);
+        $dates = DateOfInjection::paginate(8);
         return view('admin.date.index')
             ->with('dates', $dates);
     }
@@ -21,7 +21,7 @@ class DateOfInjectionController extends Controller
         if ($request->ajax()) {
             $search = $request->search;
             $search = str_replace(" ", "%", $search);
-            $dates = DateOfInjection::where('name', 'like', '%' . $search . '%')->paginate(4);
+            $dates = DateOfInjection::where('name', 'like', '%' . $search . '%')->paginate(8);
             return view('admin.date.read')
                 ->with('dates', $dates)->render();
         }

@@ -1,6 +1,6 @@
 @if (count($products)>0)
 <div class="table-responsive mt-4">
-    <table class="table table-striped table-bordered ">
+    <table class="table table-striped table-bordered table-responsive ">
         <thead>
             <tr>
                 <th>ID</th>

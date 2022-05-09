@@ -52,6 +52,7 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
         Route::delete('oxy_producer/remove/{id}', [OxyProducerController::class, 'remove'])->name('admin.oxy_producer.remove');
         // oxy
         Route::get('oxy_product', [OxyController::class, 'index'])->name('admin.oxy_product');
+        Route::post('oxy_product/post', [OxyController::class, 'post'])->name('admin.oxy_product.post');
         Route::get('oxy_product/read', [OxyController::class, 'read'])->name('admin.oxy_product.read');
         Route::get('oxy_product/create', [OxyController::class, 'create'])->name('admin.oxy_product.create');
         Route::post('oxy_product/store', [OxyController::class, 'store'])->name('admin.oxy_product.store');

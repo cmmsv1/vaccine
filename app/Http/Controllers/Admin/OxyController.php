@@ -14,7 +14,7 @@ class OxyController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Oxy::latest()->paginate(4);
+        $products = Oxy::latest()->paginate(8);
         return view('admin.oxy_product.index')
             ->with(compact('products'));
     }
@@ -32,7 +32,7 @@ class OxyController extends Controller
         if ($request->ajax()) {
             $search = $request->search;
             $search = str_replace(" ", "%", $search);
-            $products = Oxy::where('name', 'like', '%' . $search . '%')->latest()->paginate(4);
+            $products = Oxy::where('name', 'like', '%' . $search . '%')->latest()->paginate(8);
             return view('admin.oxy_product.read')
                 ->with('products', $products)->render();
         }

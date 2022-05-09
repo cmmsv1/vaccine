@@ -1,10 +1,13 @@
 @extends('layouts.dashboard')
 @section('content')
 @if (Auth::user()->confirm_register == 1)
-<div class="px-4 py-4">
-
-    <span>Thông tin của bạn đang trong quá trình xác minh . Vui lòng quay lại sau</span>
-</div>
+    <div class="px-4 py-4">
+        <span>Thông tin của bạn đang trong quá trình xác minh . Vui lòng quay lại sau</span>
+    </div>
+@elseif(Auth::user()->confirm_register == 2)
+    <div class="px-4 py-4">
+        <span>Thông tin của bạn đang đã được xác minh . Vui lòng vào trang đăng ký tiêm để đăng ký</span>
+    </div>
 @else
 <style>
     .form-check-input{
@@ -22,23 +25,28 @@
                                         
                                 <div class="form-group">
                                     <label for="">Full Name</label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" id="name" name="name" class="form-control">
+                                    <span style="color: red;font-size: 13px; " class="err name_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Birthday</label>
-                                    <input type="date" name="birthday" class="form-control">
+                                    <input type="date" id="birthday" name="birthday" class="form-control">
+                                    <span style="color: red;font-size: 13px; " class="err birthday_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Số hộ chiếu/CMND/CCCD</label>
-                                    <input type="text" name="cmnd" class="form-control">
+                                    <input type="number" id="cmnd" name="cmnd" class="form-control">
+                                    <span style="color: red;font-size: 13px; " class="err cmnd_error"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Số thẻ BHYT</label>
-                                    <input type="text" name="bhyt" class="form-control">
+                                    <input type="number" id="bhyt" name="bhyt" class="form-control">
+                                    <span style="color: red;font-size: 13px; " class="err bhyt_error"></span>
                                 </div>       
                                 <div class="form-group">
                                     <label for="">Nghề nghiệp</label>
-                                    <input type="text" name="job" class="form-control">
+                                    <input type="text" id="job" name="job" class="form-control">
+                                    <span style="color: red;font-size: 13px; " class="err job_error"></span>
                                 </div> 
                                 <div class="form-group">
                                     <label for="" style="margin-right: 40px">Gender :</label>
@@ -50,23 +58,28 @@
                             
                             <div class="form-group">
                                 <label for="">Đối tượng</label>
-                                <input type="text" name="doituong" class="form-control">
+                                <input type="text" id="doituong" name="doituong" class="form-control">
+                                <span style="color: red;font-size: 13px; " class="err doituong_error"></span>
                             </div>
                             <div class="form-group">
                                 <label for="">Tỉnh/Thành Phố</label>
-                                <input type="text" name="province" class="form-control">
+                                <input type="text" id="province" name="province" class="form-control">
+                                <span style="color: red;font-size: 13px; " class="err province_error"></span>
                             </div>
                             <div class="form-group">
                                 <label for="">Quận/Huyện</label>
-                                <input type="text" name="district" class="form-control">
+                                <input type="text" id="district" name="district" class="form-control">
+                                <span style="color: red;font-size: 13px; " class="err district_error"></span>
                             </div>
                             <div class="form-group">
                                 <label for="">Phường/Xã</label>
-                                <input type="text" name="ward" class="form-control">
+                                <input type="text" id="ward" name="ward" class="form-control">
+                                <span style="color: red;font-size: 13px; " class="err ward_error"></span>
                             </div>
                             <div class="form-group">
                                 <label for="">Địa chỉ nơi ở</label>
-                                <input type="text" name="house" class="form-control">
+                                <input type="text" id="house" name="house" class="form-control">
+                                <span style="color: red;font-size: 13px; " class="err house_error"></span>
                             </div>
                         </div>     
                     </div>
@@ -180,10 +193,77 @@
 @endif
 <script>
     $(document).ready(function () {
+        function validate() { 
+            var name = $('#name').val();
+            var birthday = $('#birthday').val();
+            var cmnd = $('#cmnd').val();
+            var bhyt = $('#bhyt').val(); 
+            var job = $('#job').val();
+            var doituong = $('#doituong').val();
+            var province = $('#province').val();
+            var district = $('#district').val();
+            var ward = $('#ward').val();
+            var house = $('#house').val();
+            var errors = {};
+            if (!name) {
+                Object.assign(errors, {name: "Bạn cần nhập tên"});
+            }
+            if (!birthday) {
+                Object.assign(errors, {birthday: "Bạn cần nhập birthday"});
+            }
+            if (!cmnd) {
+                Object.assign(errors, {cmnd: "Bạn cần nhập cmnd"});
+            }
+            if (!job) {
+                Object.assign(errors, {job: "Bạn cần nhập nghề nghiệp"});
+            }
+            if (!bhyt) {
+                Object.assign(errors, {bhyt: "Bạn cần nhập thông tin bảo hiểm y tế"});
+            }
+            if (!doituong) {
+                Object.assign(errors, {doituong: "Bạn cần nhập thông tin này"});
+            }
+            if (!province) {
+                Object.assign(errors, {province: "Bạn cần nhập thông tin Tỉnh/Thành phố"});
+            }
+            if (!district) {
+                Object.assign(errors, {district: "Bạn cần nhập thông Quận/Huyện"});
+            }
+            if (!ward) {
+                Object.assign(errors, {ward: "Bạn cần nhập thông tin Phường/Xã"});
+            }
+            if (!house) {
+                Object.assign(errors, {house: "Bạn cần nhập thông tin nơi ở"});
+            }
+            return errors;
+        }
+        function reset(){
+            $('.name_error').text('');
+            $('.birthday_error').text('');
+            $('.cmnd_error').text('');
+            $('.bhyt_error').text(''); 
+            $('.job_error').text('');
+            $('.doituong_error').text('');
+            $('.province_error').text('');
+            $('.district_error').text('');
+            $('.ward_error').text('');
+            $('.house_error').text('');
+        }
         $("#next_user").click(function (e) { 
             e.preventDefault();
-            $('#user_info').hide();
-            $('#register_info').fadeIn();
+            reset();
+            var errors = validate();
+            if(Object.keys(errors).length === 0){
+                
+                $('#user_info').hide();
+                $('#register_info').fadeIn();
+            }else{
+                for(const [key, value] of Object.entries(errors)){
+                    $('.'+ key+'_error').text(value);
+                    $('.'+ key+'_error').parent().addClass('has-error');
+                }
+            }
+            
         });
         $("#back_info").click(function (e) { 
             e.preventDefault();

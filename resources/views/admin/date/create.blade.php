@@ -2,17 +2,27 @@
     <input type="hidden" id="id" name="id" value="">
     <div class="form-group">
         <label for="">Loại vaccine</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="Loại vaccine">
+        <select class="form-control" id="name" name="name">
+            <option value="AstraZeneca">AstraZeneca</option>
+            <option value="Pfizer">Pfizer</option>
+            <option value="Sinopharm">Sinopharm</option>
+            <option value="Moderna">Moderna</option>
+        </select>
         <span style="color: red;font-size: 12px;margin-top: 10px" class="name_error"></span>
     </div>
     <div class="form-group">
         <label for="">Số mũi</label>
-        <input type="number" name="number" id="name" class="form-control" placeholder="Số mũi">
+        <select class="form-control" id="number" name="number">
+            <option value="1">Mũi 1</option>
+            <option value="2">Mũi 2</option>
+            <option value="3">Mũi 3</option>
+            <option value="4">Mũi 4</option>
+        </select>
         <span style="color: red;font-size: 12px;margin-top: 10px" class="name_error"></span>
     </div>
     <div class="form-group">
         <label for="">Địa chỉ</label>
-        <input type="text" name="address" id="name" class="form-control" placeholder="Địa chỉ">
+        <input type="text" name="address" id="address" class="form-control" placeholder="Địa chỉ">
         <span style="color: red;font-size: 12px;margin-top: 10px" class="name_error"></span>
     </div>
     <div class="form-group">

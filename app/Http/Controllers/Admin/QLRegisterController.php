@@ -10,7 +10,7 @@ class QLRegisterController extends Controller
 {
     public function index()
     {
-        $dates = RegisterVaccine::paginate(4);
+        $dates = RegisterVaccine::paginate(8);
         return view('admin.register.index')
             ->with('dates', $dates);
     }
@@ -19,7 +19,7 @@ class QLRegisterController extends Controller
         if ($request->ajax()) {
             $search = $request->search;
             $search = str_replace(" ", "%", $search);
-            $dates = RegisterVaccine::where('name', 'like', '%' . $search . '%')->paginate(4);
+            $dates = RegisterVaccine::where('name', 'like', '%' . $search . '%')->paginate(8);
             return view('admin.register.read')
                 ->with('dates', $dates)->render();
         }

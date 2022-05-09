@@ -18,7 +18,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->user->name}}</td>
                         <td>{{$item->date_of_injection->number}}</td>
-                        <td>{{$item->name}}</td>
+                        <td>{{$item->vaccine_name}}</td>
                         <td>{{$item->date_of_injection->time .' - '. $item->date_of_injection->date}}</td>
                         <td>{{ $item->status == 0 ? 'Đăng ký mới':'Đã tiêm'}}</td>
                         @if ($item->status == 0)

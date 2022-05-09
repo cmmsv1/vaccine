@@ -12,7 +12,7 @@ class OxyProducerController extends Controller
 {
     public function index()
     {
-        $categories = OxyProducer::paginate(4);
+        $categories = OxyProducer::paginate(8);
         return view('admin.oxy_producer.index')
             ->with('categories', $categories);
     }
@@ -36,7 +36,7 @@ class OxyProducerController extends Controller
         if ($request->ajax()) {
             $search = $request->search;
             $search = str_replace(" ", "%", $search);
-            $categories = OxyProducer::where('name', 'like', '%' . $search . '%')->paginate(4);
+            $categories = OxyProducer::where('name', 'like', '%' . $search . '%')->paginate(8);
             return view('admin.oxy_producer.read')
                 ->with('categories', $categories)->render();
         }

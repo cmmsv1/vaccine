@@ -27,6 +27,8 @@ class SignUpVaccController extends Controller
                 $register = new RegisterVaccine();
                 $register->user_id = Auth::id();
                 $register->name = Auth::user()->name;
+                $register->number = $request->number;
+                $register->vaccine_name = $request->vaccine_name;
                 $register->date_of_injection_id = $id;
                 $register->save();
                 return response()->json(['success' => 'Đăng ký thành công']);

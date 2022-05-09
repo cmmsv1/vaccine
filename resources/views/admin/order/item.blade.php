@@ -1,5 +1,6 @@
 @if ($orders)
-<table class="table table-striped table-bordered">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-responsive">
     <thead>
         <tr>
             <th>ID</th>
@@ -37,6 +38,7 @@
         @endforeach
     </tbody>
 </table>
+</div>
 {!! $orders->links()!!}
 @else
     <span>Không có đơn nào</span>

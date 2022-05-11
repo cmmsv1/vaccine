@@ -13,6 +13,9 @@
                     <div class="card-body">
                       <h5 class="card-title">{{$oxy->name}}</h5>
                       <p class="card-text">{{$oxy->short_desc}}</p>
+                      <p class="card-text">Giá :  @php
+                        echo number_format($oxy->price, 0, ',', '.').'đ';
+                    @endphp</p>
                       <p>Số lượng</p>
                       <div class="quantity-input mb-3">
                         <input disabled type="text" pattern="[0-9]*"  data-max="{{$oxy->quantity}}" class="product_quantity"  style="width: 50px;margin-right: 20px">
@@ -56,50 +59,81 @@
             while (currentTime + miliseconds >= new Date().getTime()) {
             }
         }
+        function validate() { 
+            var name = $('#name').val();
+            var phone = $('#phone').val();
+            var address = $('#address').val();
+            var errors = {};
+            if (!name) {
+                Object.assign(errors, {name: "Bạn cần nhập tên"});
+            }
+            if (!phone) {
+                Object.assign(errors, {phone: "Bạn cần nhập số điện thoại"});
+            }
+            if (!address) {
+                Object.assign(errors, {address: "Bạn cần nhập địa chỉ"});
+            }
+            return errors;
+        }
+        function reset(){
+            $('.name_error').text('');
+            $('.phone_error').text('');
+            $('.address_error').text('');
+        }
         $('#actions').submit(function (e) { 
             e.preventDefault();
-            var name =$('#name').val();
-            var phone =$('#phone').val();
-            var address =$('#address').val();
-            var message =$('#message').val();          
-            var oxy_id = $('.oxy_id').val();
-            var quantity = $('.product_quantity').val();
-            var total = {{$oxy->price}} * quantity;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            reset();
+            var errors = validate();
+            if(Object.keys(errors).length === 0){           
+                var name =$('#name').val();
+                var phone =$('#phone').val();
+                var address =$('#address').val();
+                var message =$('#message').val();          
+                var oxy_id = $('.oxy_id').val();
+                var quantity = $('.product_quantity').val();
+                var total = {{$oxy->price}} * quantity;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/oxy/order",
+                    data: {
+                        name:name,
+                        phone:phone,
+                        oxy_id:oxy_id,
+                        address:address,
+                        total:total,
+                        quantity:quantity,
+                        message:message
+                    },
+                    success: function (response) {
+                        $('#formModal').modal('hide');
+                        swal({
+                            title: "Success!",
+                            text: response.message,
+                            icon: "success",
+                            buttons: ["Quản lý đơn hàng!", "Ở lại trang!"],
+                            })
+                            .then((ok) => {
+                            if (ok) {
+                                
+                            } else {
+                                window.location.href = "/user/orders";
+                            }
+                        });
+                        
+                    }
+                });
+            }else{
+                for(const [key, value] of Object.entries(errors)){
+                    $('.'+ key+'_error').text(value);
+                    $('.'+ key+'_error').parent().addClass('has-error');
                 }
-            });
-            $.ajax({
-                type: "POST",
-                url: "/oxy/order",
-                data: {
-                    name:name,
-                    phone:phone,
-                    oxy_id:oxy_id,
-                    address:address,
-                    total:total,
-                    quantity:quantity,
-                    message:message
-                },
-                success: function (response) {
-                    $('#formModal').modal('hide');
-                    swal({
-                        title: "Success!",
-                        text: response.message,
-                        icon: "success",
-                        buttons: ["Quản lý đơn hàng!", "Ở lại trang!"],
-                        })
-                        .then((ok) => {
-                        if (ok) {
-                            
-                        } else {
-                            window.location.href = "/user/orders";
-                        }
-                    });
-                    
-                }
-            });
+            }
+            
         });
         // show form add category
         $(document).on('click', '.payment',function(event) {
@@ -113,15 +147,18 @@
                 );
                 var quantity = $('.product_quantity').val();
                 var total = {{$oxy->price}} * quantity;
+                var total_format = total.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
                 var id = $('.oxy_id').val();
                 setTimeout(
                     function() 
                     {
                         $('.oxy_name').html("{{$oxy->name}}");
                         $('.oxy_quantity').html(quantity);
-                        $('.oxy_price').html("{{$oxy->price}}");
+                        $('.oxy_price').html("@php
+                        echo number_format($oxy->price, 0, ',', '.').'đ';
+                    @endphp");
                         $('.oxy_image').attr('src', '{{asset('assets/images/products')}}/{{$oxy->image}}');
-                        $('.total').html(total);
+                        $('.total').html(total_format);
                         $('#oxy_id_form').val(id);
                 }, 700);
                     

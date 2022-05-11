@@ -55,17 +55,3 @@
         <button class="btn btn-success" type="submit">Đặt hàng</button>
     </div>
 </div>
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#img').show();
-                $('#img').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
